@@ -8,13 +8,14 @@ from ..anki.adapters.hook_manager import AnkiHookManager
 from ..export.anki_exporter_wrapper import exporters_hook, exporters_hook_new
 from ..history.archiver_vendor import ArchiverVendor
 from ..utils.deckconf import disambiguate_crowdanki_uuid
+from dataclasses import field
 
 
 @dataclass
 class HookVendor:
     window: Any
     config: ConfigSettings
-    hook_manager: AnkiHookManager = AnkiHookManager()
+    hook_manager: AnkiHookManager = field(default_factory=AnkiHookManager)
 
     def setup_hooks(self):
         self.setup_exporter_hook()
